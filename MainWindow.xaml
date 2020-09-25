@@ -1,0 +1,109 @@
+﻿<Window x:Class="BowieD.Unturned.IDTableGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.IDTableGenerator"
+        xmlns:tableStyles="clr-namespace:BowieD.Unturned.IDTableGenerator.TableStyles"
+        xmlns:comparers="clr-namespace:BowieD.Unturned.IDTableGenerator.Comparers"
+        mc:Ignorable="d"
+        Title="BowieD's ID table generator" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Name="miStyle" Header="Style">
+                <MenuItem Header="Generic Table">
+                    <MenuItem.Tag>
+                        <tableStyles:GenericStyle/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Header="Markdown">
+                    <MenuItem.Tag>
+                        <tableStyles:MarkdownStyle/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Header="Steam Table">
+                    <MenuItem.Tag>
+                        <tableStyles:SteamTableStyle/>
+                    </MenuItem.Tag>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Name="miSortBy" Header="Order By">
+                <MenuItem Name="miSortByTypeA" Header="Type [A-Z]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordTypeAscending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Name="miSortByTypeD" Header="Type [Z-A]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordTypeDescending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Name="miSortByIDA" Header="ID [0-9]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordIDAscending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Name="miSortByIDD" Header="ID [9-0]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordIDDescending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Name="miSortByNameA" Header="Name [A-Z]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordNameAscending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+                <MenuItem Name="miSortByNameD" Header="Name [Z-A]">
+                    <MenuItem.Tag>
+                        <comparers:TableRecordNameDescending/>
+                    </MenuItem.Tag>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="About" Click="MenuItem_About_Click"/>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView Name="lstView" Grid.Row="0" Margin="10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="GUID" DisplayMemberBinding="{Binding GUID}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button Name="btnSearch" Grid.Row="1" Margin="10" Content="Search"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="txtOutput" TextWrapping="Wrap" Grid.Row="0" Margin="10" IsReadOnly="True" IsUndoEnabled="False"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                        <CheckBox Name="chkInclType" Margin="5" Content="Include Type"/>
+                        <CheckBox Name="chkInclID" Margin="5" IsChecked="True" Content="Include ID"/>
+                        <CheckBox Name="chkInclName" Margin="5" IsChecked="True" Content="Include Name"/>
+                        <CheckBox Name="chkInclGUID" Margin="5" Content="Include GUID"/>
+                    </StackPanel>
+                    <Button IsEnabled="False" ToolTip="Select style, search for items and then proceed" Name="btnGenerate" Grid.Row="2" Content="Generate" Margin="10"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

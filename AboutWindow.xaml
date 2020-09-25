@@ -1,0 +1,16 @@
+﻿<Window x:Class="BowieD.Unturned.IDTableGenerator.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BowieD.Unturned.IDTableGenerator"
+        mc:Ignorable="d"
+        Title="About" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight">
+    <Grid>
+        <ScrollViewer Margin="10">
+            <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="24">
+                Made by BowieD in 2020. <LineBreak/> <LineBreak/> I also develop other Unturned-related stuff like plugins and other apps. <LineBreak/>You can check them out at my <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/iBowie">Github Profile Page</Hyperlink>
+            </TextBlock>
+        </ScrollViewer>
+    </Grid>
+</Window>
