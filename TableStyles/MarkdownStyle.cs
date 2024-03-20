@@ -96,7 +96,7 @@ namespace BowieD.Unturned.IDTableGenerator.TableStyles
                     appendColumn(pad(item.Name, maxLName));
                 if (include.HasFlag(EInclude.GUID))
                     appendColumn(pad(item.GUID.ToString("N"), maxLGUID));
-                
+
                 sb.AppendLine("|");
             }
 

@@ -9,12 +9,12 @@ namespace BowieD.Unturned.IDTableGenerator.TableStyles
         public string Create(IEnumerable<TableRecord> records, EInclude include)
         {
             StringBuilder sb = new StringBuilder();
-            
+
             void appendth(object content)
             {
                 sb.AppendLine($"[th]{content}[/th]");
             }
-            
+
             sb.AppendLine("[table]");
 
             sb.AppendLine("[tr]");

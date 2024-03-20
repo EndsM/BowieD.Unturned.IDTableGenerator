@@ -95,12 +95,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="txtOutput" TextWrapping="Wrap" Grid.Row="0" Margin="10" IsReadOnly="True" IsUndoEnabled="False"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
-                        <CheckBox Name="chkInclType" Margin="5" Content="Include Type"/>
-                        <CheckBox Name="chkInclID" Margin="5" IsChecked="True" Content="Include ID"/>
-                        <CheckBox Name="chkInclName" Margin="5" IsChecked="True" Content="Include Name"/>
-                        <CheckBox Name="chkInclGUID" Margin="5" Content="Include GUID"/>
-                    </StackPanel>
+                    <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                        <CheckBox x:Name="chkInclType" Content="Include Type"/>
+                        <CheckBox x:Name="chkInclID" IsChecked="True" Content="Include ID"/>
+                        <CheckBox x:Name="chkInclName" IsChecked="True" Content="Include Name"/>
+                        <CheckBox x:Name="chkInclGUID" Content="Include GUID"/>
+                    </WrapPanel>
                     <Button IsEnabled="False" ToolTip="Select style, search for items and then proceed" Name="btnGenerate" Grid.Row="2" Content="Generate" Margin="10"/>
                 </Grid>
             </Grid>
