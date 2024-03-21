@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BowieD.Unturned.IDTableGenerator
 {
@@ -13,10 +12,12 @@ namespace BowieD.Unturned.IDTableGenerator
         Type = 1 << 3,
         All = GUID | ID | Name | Type
     }
+
     public interface ITableStyle
     {
         string Create(IEnumerable<TableRecord> records, EInclude include);
     }
+
     public struct TableRecord
     {
         public TableRecord(Guid guid, ushort id, string name, string type)
