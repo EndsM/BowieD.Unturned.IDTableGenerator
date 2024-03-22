@@ -119,18 +119,19 @@ namespace BowieD.Unturned.IDTableGenerator
             if (sfd.ShowDialog() == true)
             {
                 Records.Clear();
+                // This is left-side windows' content
                 lstView.Items.Clear();
-
-                foreach (var fi in new DirectoryInfo(System.IO.Path.GetDirectoryName(sfd.FileName)).GetFiles("*.dat", SearchOption.AllDirectories))
+                // recursively get every .dat files in game folder, then go through each of them
+                foreach (var datFile in new DirectoryInfo(Path.GetDirectoryName(sfd.FileName)).GetFiles("*.dat", SearchOption.AllDirectories))
                 {
-                    string shortName = fi.Name;
+                    string shortName = datFile.Name;
 
                     if (ignoreNames.Any(d => d + ".dat" == shortName.ToLowerInvariant()))
                         continue;
 
                     try
                     {
-                        string[] lines = File.ReadAllLines(fi.FullName);
+                        string[] lines = File.ReadAllLines(datFile.FullName);
 
                         Guid? _guid = null;
                         string _name = null;
@@ -164,7 +165,7 @@ namespace BowieD.Unturned.IDTableGenerator
                         if (_id == null)
                             continue;
 
-                        string dir = fi.DirectoryName;
+                        string dir = datFile.DirectoryName;
 
                         string lPath = System.IO.Path.Combine(dir, "English.dat");
                         if (File.Exists(lPath))
@@ -188,11 +189,14 @@ namespace BowieD.Unturned.IDTableGenerator
                             }
                         }
 
-                        TableRecord tr = new TableRecord(_guid ?? Guid.Empty, _id ?? 0, _name ?? fi.Directory.Name, _type ?? "Unknown");
+                        TableRecord record = new TableRecord(_guid ?? Guid.Empty, _id ?? 0, _name ?? datFile.Directory.Name, _type ?? "Unknown");
 
-                        Records.Add(tr);
+                        Records.Add(record);
                     }
-                    catch { }
+                    catch
+                    {
+                        // wait implement 
+                    }
                 }
 
                 foreach (var r in Records)
@@ -239,8 +243,8 @@ namespace BowieD.Unturned.IDTableGenerator
 
         private void MenuItem_About_Click(object sender, RoutedEventArgs e)
         {
-            AboutWindow aw = new AboutWindow();
-            aw.ShowDialog();
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
         }
     }
 }
