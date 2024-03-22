@@ -35,6 +35,7 @@ namespace BowieD.Unturned.IDTableGenerator
 
         private static readonly string[] ignoreNames = new string[]
         {
+            // These are exclude for they are localization files of given items of game data.
             "arabic",
             "bulgarian",
             "schinese",
@@ -138,28 +139,31 @@ namespace BowieD.Unturned.IDTableGenerator
                         string _type = null;
                         ushort? _id = null;
 
-                        foreach (var l in lines)
+                        foreach (var line in lines)
                         {
-                            string[] spl = l.Split(' ');
-
-                            if (spl.Length < 2)
+                            // TODO: I looked the .dat files, if I'd like to read more properties of them, I may need to rewrite this part. Use a model to parse these .dat files
+                            // Split the line to (usually) two string
+                            string[] splitted = line.Split(' ');
+                            // In case of a whole line without
+                            if (splitted.Length < 2)
                                 continue;
+                            // This is the letter part of the line, if the line is two parted.
+                            string value = string.Join(" ", splitted.Skip(1));
 
-                            string j = string.Join(" ", spl.Skip(1));
-
-                            string v = l.ToLowerInvariant();
-                            if (v.StartsWith("id"))
+                            string lowerCased = line.ToLowerInvariant();
+                            // These If actually read the first part of the line to determine what actually this line is...
+                            if (lowerCased.StartsWith("id"))
                             {
-                                if (ushort.TryParse(j, out ushort res))
-                                    _id = res;
+                                if (ushort.TryParse(value, out ushort result))
+                                    _id = result;
                             }
-                            else if (v.StartsWith("guid"))
+                            else if (lowerCased.StartsWith("guid"))
                             {
-                                if (Guid.TryParse(j, out Guid res))
-                                    _guid = res;
+                                if (Guid.TryParse(value, out Guid result))
+                                    _guid = result;
                             }
-                            else if (v.StartsWith("type"))
-                                _type = j;
+                            else if (lowerCased.StartsWith("type"))
+                                _type = value;
                         }
 
                         if (_id == null)
@@ -172,16 +176,16 @@ namespace BowieD.Unturned.IDTableGenerator
                         {
                             string[] llines = File.ReadAllLines(lPath);
 
-                            foreach (var l in llines)
+                            foreach (var line in llines)
                             {
-                                string[] spl = l.Split(' ');
+                                string[] splitted = line.Split(' ');
 
-                                if (spl.Length < 2)
+                                if (splitted.Length < 2)
                                     continue;
 
-                                string j = string.Join(" ", spl.Skip(1));
+                                string j = string.Join(" ", splitted.Skip(1));
 
-                                string v = l.ToLowerInvariant();
+                                string v = line.ToLowerInvariant();
                                 if (v.StartsWith("name"))
                                 {
                                     _name = j;
