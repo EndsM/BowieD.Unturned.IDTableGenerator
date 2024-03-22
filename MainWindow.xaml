@@ -14,6 +14,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
+            <MenuItem Name="miFile" Header="File">
+                <MenuItem Header="Quit" Click="MenuItem_Quit_Click"/>
+            </MenuItem>
             <MenuItem Name="miStyle" Header="Style">
                 <MenuItem Header="Generic Table">
                     <MenuItem.Tag>

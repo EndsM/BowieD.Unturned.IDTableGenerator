@@ -171,7 +171,7 @@ namespace BowieD.Unturned.IDTableGenerator
 
                         string dir = datFile.DirectoryName;
 
-                        string lPath = System.IO.Path.Combine(dir, "English.dat");
+                        string lPath = Path.Combine(dir, "English.dat");
                         if (File.Exists(lPath))
                         {
                             string[] llines = File.ReadAllLines(lPath);
@@ -249,6 +249,11 @@ namespace BowieD.Unturned.IDTableGenerator
         {
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.ShowDialog();
+        }
+
+        private void MenuItem_Quit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
